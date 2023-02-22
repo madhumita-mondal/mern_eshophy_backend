@@ -48,6 +48,7 @@ const connectDb = require('./config/config');
 const productsRoute = require ('./routes/productsRoute')
 const usersRoutes = require ('./routes/UsersRoute')
 const orderRoutes = require("./routes/orderRoute");
+const path = require('path')
 
 
 dotenv.config();
@@ -71,11 +72,17 @@ app.use("/api/orders", orderRoutes);
 app.get("/api/config/paypal", (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID);
   });
-  
+
+//static files
+app.use(express.static(path.join(__dirname,'./build')));
+
+app.get('*', function(req,res){
+    res.sendFile(path.join(__dirname, './build/index.html'));
+});
 
 app.use(errorHandler);
 
-const PORT = 8080;
+const PORT = 8000;
 app.listen(process.env.PORT || PORT, () => {
     console.log(
         `Server Running in ${process.env.NODE_ENV} mode on Port ${process.env.PORT}`.inverse);
