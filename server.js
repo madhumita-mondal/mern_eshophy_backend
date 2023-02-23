@@ -61,6 +61,8 @@ const app = express();
 //middleware bodyparser
 app.use(express.json());
 
+
+
 app.get('/', (req,res) => {
     res.send('<h1>Welcome to  Node server</h1>');
 });
@@ -72,6 +74,12 @@ app.use("/api/orders", orderRoutes);
 app.get("/api/config/paypal", (req, res) => {
     res.send(process.env.PAYPAL_CLIENT_ID);
   });
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "https://eshophy-frontend.onrender.com");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 //static files
 app.use(express.static(path.join(__dirname,'./build')));
