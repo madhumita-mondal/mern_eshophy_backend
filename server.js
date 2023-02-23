@@ -49,6 +49,7 @@ const productsRoute = require ('./routes/productsRoute')
 const usersRoutes = require ('./routes/UsersRoute')
 const orderRoutes = require("./routes/orderRoute");
 const path = require('path')
+const cors = require('cors')
 
 
 dotenv.config();
@@ -67,7 +68,7 @@ app.get('/', (req,res) => {
     res.send('<h1>Welcome to  Node server</h1>');
 });
 
-
+app.use(cors())
 app.use('/api', productsRoute);
 app.use('/api/users', usersRoutes);
 app.use("/api/orders", orderRoutes);
