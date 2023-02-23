@@ -77,6 +77,8 @@ app.get("/api/config/paypal", (req, res) => {
   });
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'https://eshophy-frontend.onrender.com');
+  res.setHeader('Access-Control-Allow-Methods', '"POST", "PUT", "GET", "DELETE", "OPTIONS"');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
 
